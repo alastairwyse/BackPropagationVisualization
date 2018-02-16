@@ -1,0 +1,208 @@
+﻿body, .ContainerPanel, .ControlPanelOuter, .NetworkPanelOuter, .OperationPanelOuter
+{
+    background: #191919;
+}
+
+.ControlPanelOuter, .NetworkPanelOuter, .OperationPanelOuter
+{
+    float: left;
+    position: relative;
+    display: flex;
+}
+
+.ControlPanelInner, .NetworkPanelInner, .OperationPanelInner
+{
+    margin: auto;
+    background: #2d2d2d;
+    font-family: Arial, Verdana;
+    font-size: 9pt;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+.ContainerPanel
+{
+    float: left;
+    width: 760px;
+}
+
+.ControlPanelOuter 
+{
+    height: 480px;
+    width: 270px;
+}
+
+.ControlPanelInner
+{
+    height: 450px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ControlPanelControlBox
+{
+    width: 195px;
+    margin-left: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.PanelHeading1
+{
+    padding: 10px;
+    text-align: left;
+    font-size: 18pt;
+    font-family: 'Roboto', 'Arial', 'Verdana';
+}
+
+.PanelHeading2
+{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: left;
+    font-size: 11pt;
+    font-weight: normal;
+    color: #969696;
+}
+
+.ControlPanelInput
+{
+    font-size: 11.5pt;
+    margin: 0px;
+}
+
+.NetworkPanelOuter
+{
+    height: 480px;
+    width: 490px;
+    vertical-align: top;
+} 
+
+.NetworkPanelInner
+{
+    height: 450px;
+    width: 460px;
+}
+
+.TableDataBase
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 7px;
+    padding: 6px;
+    width: 65px;
+}
+
+.TableVerticalConnecterLine
+{
+    background-image: url('../images/network-connector-line.png');
+    background-position: center;
+    background-repeat: repeat-y;
+    /* TODO: Need to remove specific pixel length if possible */
+    height: 40px;
+}
+
+.TableHorizontalConnecterLine
+{
+    background-image: url('../images/network-connector-line.png');
+    background-position: center;
+    background-repeat: repeat-x;
+    /* TODO: Need to remove specific pixel length if possible */
+    width: 30px;
+}
+
+.TableDataInputValue
+{
+    border-width: 0px;
+}
+
+.InputValueCheckBoxWrapper
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* TODO: Doesn't align properly unless I do this... need to find a better way */
+    margin-left: 0.8em;
+}
+
+.InputValueCheckBox
+{
+    margin: 0px;
+}
+
+.TableDataActivationValue
+{
+    border-color: #e4e4e4;
+}
+
+.TableDataInputWeight
+{
+    /* 2018-01-03 TODO: Need to change this to A200 */
+    border-color: #40c4ff;
+}
+
+.TableDataOutputWeight
+{
+    border-color: #ff9900;
+}
+
+.OperationPanelOuter
+{
+    height: 100px;
+    width: 760px;
+    clear: left;
+}
+
+.OperationPanelInner
+{
+    height: 70px;
+    width: 730px;
+}
+
+.OperationPanelButtonWrapper
+{
+    height: 100%;
+    width: 470px;
+    position: relative;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.OperationPanelButtons
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.WaitDialog
+{
+    height: 140px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.md-button.md-raised:not([disabled])
+{
+    /* TODO: Using specific colors here... not good.  Need to at least define a custom material style and make sure the colors match these ones */
+    background: #d9d9d9;
+    color: #000000;
+}
+
+.md-button.md-raised:not([disabled]):hover
+{
+    background: #40c4ff;
+    color: #ffffff;
+}
+

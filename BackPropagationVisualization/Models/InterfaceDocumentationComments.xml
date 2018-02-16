@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<doc>
+    <assembly>
+        <name>BackPropogationVisualization</name>
+    </assembly>
+    <members>
+        <member name="T:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork">
+            <summary>
+            An abstraction of the SimpleML.BasicFeedForwardNeuralNetwork class, to facilitate mocking and unit testing.
+            </summary>
+        </member>
+        <member name="M:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.InitialiseWeights">
+            <summary>
+            Sets the weights in the network to small, random values.
+            </summary>
+        </member>
+        <member name="M:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.Train(System.Double[0:,0:],System.Double[0:,0:],System.Double,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Trains the network using the specified training data for the specified number of epochs.
+            </summary>
+            <param name="trainingData">An array containing the training data.  The first dimension represents each individual training case, and the second dimension represents the input layer values.</param>
+            <param name="targetValues">An array containing the training target values (labels).  The first dimension represents each individual training case, and the second dimension represents the output layer target values.</param>
+            <param name="learningRate">The learning rate to use during training.</param>
+            <param name="batchSize">The number of training cases to evaluate before updating the weights during each iteration through the training set.</param>
+            <param name="numberOfEpochs">The number of iterations through the complete training set to perform during training.</param>
+            <param name="keepCostHistory">Whether to record the history of cost values.</param>
+        </member>
+        <member name="M:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.Predict(System.Double[0:,0:])">
+            <summary>
+            Predicts output values for the specified input data based on the current weights in the network.
+            </summary>
+            <param name="inputData">An array containing the input data.  The first dimension represents each individual data item, and the second dimension represents the individual input layer values for the data item.</param>
+            <returns>A 2 dimensional array containing the predicted values.  The first dimension contains an entry for each individual item in the input data.  The second dimension represents each output layer unit.</returns>
+        </member>
+        <member name="P:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.InputToHiddenLayerWeights">
+            <summary>
+            The values of the weights between the input and hidden layers of the network.  The first dimension represents the input units, and the second dimension the hidden units.
+            </summary>
+        </member>
+        <member name="P:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.HiddenToOutputLayerWeights">
+            <summary>
+            The values of the weights between the hidden and output layers of the network.  The first dimension represents the hidden units, and the second dimension the output units.
+            </summary>
+        </member>
+        <member name="P:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.HiddenLayerActivationValues">
+            <summary>
+            The activation values of the hidden layer units.
+            </summary>
+        </member>
+        <member name="P:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.OutputLayerActivationValues">
+            <summary>
+            The activation values of the output layer units.
+            </summary>
+        </member>
+        <member name="P:BackPropagationVisualization.Models.IFeedForwardNeuralNetwork.Cost">
+            <summary>
+            The cross entropy cost using the current weight values.
+            </summary>
+        </member>
+    </members>
+</doc>
