@@ -61,24 +61,24 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="SimpleML, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleML.0.11.0.0\lib\net40\SimpleML.dll</HintPath>
+    <Reference Include="SimpleML, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleML.0.12.0\lib\net40\SimpleML.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleML.Containers, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleML.0.11.0.0\lib\net40\SimpleML.Containers.dll</HintPath>
+    <Reference Include="SimpleML.Containers, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleML.0.12.0\lib\net40\SimpleML.Containers.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleML.Containers.Persistence, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleML.0.11.0.0\lib\net40\SimpleML.Containers.Persistence.dll</HintPath>
+    <Reference Include="SimpleML.Containers.Persistence, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleML.0.12.0\lib\net40\SimpleML.Containers.Persistence.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleML.Containers.Serialization, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleML.0.11.0.0\lib\net40\SimpleML.Containers.Serialization.dll</HintPath>
+    <Reference Include="SimpleML.Containers.Serialization, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleML.0.12.0\lib\net40\SimpleML.Containers.Serialization.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleML.Metrics, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleML.0.11.0.0\lib\net40\SimpleML.Metrics.dll</HintPath>
+    <Reference Include="SimpleML.Metrics, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleML.0.12.0\lib\net40\SimpleML.Metrics.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />

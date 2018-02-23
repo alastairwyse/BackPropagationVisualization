@@ -16,7 +16,7 @@ app.filter('trimDoubleFilter', function () {
                 return "";
             }
             else {
-                return inputDouble.toPrecision(doubleDisplayDigits).toString().substring(0, doubleDisplayDigits);
+                return inputDouble.toFixed(doubleDisplayDigits).substring(0, doubleDisplayDigits);
             }
         }
     }
