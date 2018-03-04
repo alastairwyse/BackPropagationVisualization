@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Downloads, builds, and tests the BackPropagationVisualization project, before deploying it to Amazon Web Services Elastic Beanstalk.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>30</daysToKeep>
+        <numToKeep>3</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>GitHubTagName</name>
+          <description>The tag to use to retrieve the source code</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>WorkspaceSourceCodeFolder</name>
+          <description>The folder in the Jenkins workspace in which the source code is stored</description>
+          <defaultValue>Source</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>WorkspaceDeploymentPackageFolder</name>
+          <description>The folder in the Jenkins workspace in which the IIS deployment package is stored</description>
+          <defaultValue>DeploymentPackage</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ProjectName</name>
+          <description>The name of the project in GitHub, source code, etc...</description>
+          <defaultValue>BackPropagationVisualization</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>PathToNugetExecutable</name>
+          <description>The full path to the folder where nuget.exe is located</description>
+          <defaultValue>C:\Temp\</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>PathToAWSDeployExecutable</name>
+          <description>The full path to the folder where awsdeploy.exe is located</description>
+          <defaultValue>C:\Program Files\AWS Tools\Deployment Tool\</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWSProfileName</name>
+          <description>The AWS profile to use when interacting with Elastic Beanstalk.  This parameter should match one of the profiles defined in the AWS credentials file (stored in &apos;%UserProfile%\.aws&apos; folder for Windows systems), and this profile should be linked with an AWS user which has the following attached policies...
+AWSElasticBeanstalkEnhancedHealth 
+AWSElasticBeanstalkWebTier 
+AWSElasticBeanstalkMulticontainerDocker
+AWSElasticBeanstalkService  
+AWSElasticBeanstalkWorkerTier 
+</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWSRegion</name>
+          <description>The AWS region in which the Elastic Beanstalk instance exists or should be created</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWSUploadBucket</name>
+          <description>The AWS S3 bucket where the IIS deployment package should be uploaded to</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWSElasticBeanstalkApplicationName</name>
+          <description>The AWS Elastic Beanstalk application to deploy to</description>
+          <defaultValue>BackPropogationVisualization</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWSElasticBeanstalkEnvironmentName</name>
+          <description>The AWS Elastic Beanstalk application environment to deploy to</description>
+          <defaultValue>backpropogationvisualization-env</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <sp.sd.fileoperations.FileOperationsBuilder plugin="file-operations@1.7">
+      <fileOperations>
+        <sp.sd.fileoperations.FileDownloadOperation>
+          <url>https://github.com/alastairwyse/BackPropagationVisualization/archive/${GitHubTagName}.zip</url>
+          <userName></userName>
+          <targetLocation></targetLocation>
+          <targetFileName>SourceBundle.zip</targetFileName>
+          <password>{AQAAABAAAAAQAIPQuzDfu3oKwniEK9vgJBmtVDNZFK0/Dwl6tJ1nxVw=}</password>
+        </sp.sd.fileoperations.FileDownloadOperation>
+        <sp.sd.fileoperations.FileUnZipOperation>
+          <filePath>SourceBundle.zip</filePath>
+          <targetLocation>${WorkspaceSourceCodeFolder}/</targetLocation>
+        </sp.sd.fileoperations.FileUnZipOperation>
+      </fileOperations>
+    </sp.sd.fileoperations.FileOperationsBuilder>
+    <hudson.tasks.BatchFile>
+      <command>:: Restore the nuget packages&#xd;
+cd\&#xd;
+cd %PathToNugetExecutable%&#xd;
+nuget.exe restore &quot;%WORKSPACE%\%WorkspaceSourceCodeFolder%\%ProjectName%-%GitHubTagName%\%ProjectName%.sln&quot;</command>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.msbuild.MsBuildBuilder plugin="msbuild@1.29">
+      <msBuildName>VS2013 Community</msBuildName>
+      <msBuildFile>${WorkspaceSourceCodeFolder}\${ProjectName}-${GitHubTagName}\${ProjectName}.sln</msBuildFile>
+      <cmdLineArgs>/t:Build /p:Configuration=Release</cmdLineArgs>
+      <buildVariablesAsProperties>false</buildVariablesAsProperties>
+      <continueOnBuildFailure>false</continueOnBuildFailure>
+      <unstableIfWarnings>false</unstableIfWarnings>
+      <doNotUseChcpCommand>true</doNotUseChcpCommand>
+    </hudson.plugins.msbuild.MsBuildBuilder>
+    <org.jenkinsci.plugins.MsTestBuilder plugin="mstestrunner@1.3.0">
+      <msTestName>VS2013 Community</msTestName>
+      <testFiles>${WorkspaceSourceCodeFolder}\${ProjectName}-${GitHubTagName}\${ProjectName}.UnitTests\bin\Release\${ProjectName}.UnitTests.dll</testFiles>
+      <categories></categories>
+      <resultFile>${WorkspaceSourceCodeFolder}\${ProjectName}.UnitTests.trx</resultFile>
+      <cmdLineArgs></cmdLineArgs>
+      <continueOnFail>false</continueOnFail>
+    </org.jenkinsci.plugins.MsTestBuilder>
+    <hudson.plugins.msbuild.MsBuildBuilder plugin="msbuild@1.29">
+      <msBuildName>VS2013 Community</msBuildName>
+      <msBuildFile>${WorkspaceSourceCodeFolder}\${ProjectName}-${GitHubTagName}\${ProjectName}.sln</msBuildFile>
+      <cmdLineArgs>/p:Configuration=Release /p:PublishProfile=AWSElasticBeanstalk /p:DeployOnBuild=True /p:&quot;DesktopBuildPackageLocation=${WORKSPACE}\${WorkspaceDeploymentPackageFolder}\BackPropagationVisualization.zip&quot;</cmdLineArgs>
+      <buildVariablesAsProperties>false</buildVariablesAsProperties>
+      <continueOnBuildFailure>false</continueOnBuildFailure>
+      <unstableIfWarnings>false</unstableIfWarnings>
+      <doNotUseChcpCommand>true</doNotUseChcpCommand>
+    </hudson.plugins.msbuild.MsBuildBuilder>
+    <hudson.tasks.BatchFile>
+      <command>:: Redeploy to AWS Elastic Beanstalk&#xd;
+cd\&#xd;
+cd %PathToAWSDeployExecutable%&#xd;
+awsdeploy.exe /r /DAWSProfileName=%AWSProfileName% /DRegion=%AWSRegion% /DUploadBucket=%AWSUploadBucket% /DApplication.Name=%AWSElasticBeanstalkApplicationName% /DEnvironment.Name=%AWSElasticBeanstalkEnvironmentName% /DDeploymentPackage=&quot;%WORKSPACE%\%WorkspaceDeploymentPackageFolder%\BackPropagationVisualization.zip&quot; &quot;%WORKSPACE%\%WorkspaceSourceCodeFolder%\%ProjectName%-%GitHubTagName%\Deploy\ElasticBeanstalkDeployPackage.txt&quot; </command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.34">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+  </buildWrappers>
+</project>

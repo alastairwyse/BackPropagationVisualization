@@ -59,46 +59,6 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
         }
 
         /**
-         * @name populateInputToHiddenLayerWeights
-         * @desc Retrieves the input to hidden layer weights from the neuralNetworkDataInterfaceService and sets them on the scope
-         */
-        var populateInputToHiddenLayerWeights = function () {
-            neuralNetworkDataInterfaceService.getInputToHiddenLayerWeights(
-                function (inputToHiddenLayerWeights) {
-                    $scope.InputToHiddenLayerWeights = inputToHiddenLayerWeights;
-                }, 
-                $scope.dataInterfacePostExecute.errorCallback
-            );
-        };
-
-        /**
-         * @name populateHiddenToOutputLayerWeights
-         * @desc Retrieves the hidden to output layer weights from the neuralNetworkDataInterfaceService and sets them on the scope
-         */
-        var populateHiddenToOutputLayerWeights = function () {
-            neuralNetworkDataInterfaceService.getHiddenToOutputLayerWeights(
-                function (hiddenToOutputLayerWeights) {
-                    $scope.HiddenToOutputLayerWeights = hiddenToOutputLayerWeights;
-                },
-                $scope.dataInterfacePostExecute.errorCallback
-                
-            );
-        };
-
-        /**
-         * @name populateHiddenLayerActivationValues
-         * @desc Retrieves the hidden layer activation values from the neuralNetworkDataInterfaceService and sets them on the scope
-         */
-        var populateHiddenLayerActivationValues = function () {
-            neuralNetworkDataInterfaceService.getHiddenLayerActivationValues(
-                function (hiddenLayerActivationValues) {
-                    $scope.HiddenLayerActivationValues = hiddenLayerActivationValues;
-                },
-                $scope.dataInterfacePostExecute.errorCallback
-            );
-        };
-
-        /**
          * @name populateAllHiddenLayerValues
          * @desc Retrieves all the weights and hidden layer activation values from the neuralNetworkDataInterfaceService and combines them in to an array.
          *         Allows all of these values to be shown iteratively in a single row of an HTML table using the 'data-ng-repeat' attribute.
@@ -166,9 +126,6 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
         };
 
         // Functions to call when the controller is initialized
-        populateInputToHiddenLayerWeights();
-        populateHiddenToOutputLayerWeights();
-        populateHiddenLayerActivationValues();
         populateAllHiddenLayerValues();
         populateOutputLayerActivationValue();
         populateCost();
@@ -188,7 +145,6 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
          */
         $scope.resetWeights = function () {
 
-            //initializeWaitDialog(3);
             $scope.dataInterfacePostExecute.errorOccurred = false;
             $scope.OutputLayerActivationValue = 0;
             $scope.Cost = 0;
