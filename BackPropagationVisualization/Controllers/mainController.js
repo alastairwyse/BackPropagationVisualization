@@ -65,21 +65,15 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
          */
         var populateAllHiddenLayerValues = function () {
             neuralNetworkDataInterfaceService.getInputToHiddenLayerWeights(
-                function (inputToHiddenLayerWeights) {
-                    $scope.setInputToHiddenLayerWeights(inputToHiddenLayerWeights);
-                },
+                $scope.setInputToHiddenLayerWeights,
                 $scope.dataInterfacePostExecute.errorCallback
             );
             neuralNetworkDataInterfaceService.getHiddenLayerActivationValues(
-                function (hiddenLayerActivationValues) {
-                    $scope.setHiddenLayerActivationValues(hiddenLayerActivationValues);
-                },
+                $scope.setHiddenLayerActivationValues,
                 $scope.dataInterfacePostExecute.errorCallback
             );
             neuralNetworkDataInterfaceService.getHiddenToOutputLayerWeights(
-                function (hiddenToOutputLayerWeights) {
-                    $scope.setHiddenToOutputLayerWeights(hiddenToOutputLayerWeights);
-                },
+                $scope.setHiddenToOutputLayerWeights,
                 $scope.dataInterfacePostExecute.errorCallback
             );
         };
@@ -124,11 +118,6 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
             };
             $scope.showWaitDialog();
         };
-
-        // Functions to call when the controller is initialized
-        populateAllHiddenLayerValues();
-        populateOutputLayerActivationValue();
-        populateCost();
 
         /**
          * @name setLogicalOperator
@@ -191,10 +180,8 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
                 inputValue2,
                 function (predictionResult) {
                     $scope.prediction.Result = predictionResult;
-                }, 
-                function (hiddenLayerActivationValues) {
-                    $scope.setHiddenLayerActivationValues(hiddenLayerActivationValues);
-                }, 
+                },
+                $scope.setHiddenLayerActivationValues, 
                 function (outputLayerActivationValue) {
                     $scope.OutputLayerActivationValue = outputLayerActivationValue;
                 },
@@ -317,6 +304,11 @@ app.controller("mainController", ["$scope", "$mdDialog", "neuralNetworkDataInter
                 $scope.AllHiddenLayerValues[i].activationValue = activationValue;
             }
         }
+
+        // Functions to call when the controller is initialized
+        populateAllHiddenLayerValues();
+        populateOutputLayerActivationValue();
+        populateCost();
 
         /**
          * @name showWaitDialog
