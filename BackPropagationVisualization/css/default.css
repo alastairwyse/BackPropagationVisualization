@@ -145,7 +145,8 @@
 .TableDataInputWeight
 {
     /* 2018-01-03 TODO: Need to change this to A200 */
-    border-color: #40c4ff;
+    /* border-color: #40c4ff; */
+    border-color: green;
 }
 
 .TableDataOutputWeight
