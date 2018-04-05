@@ -11,6 +11,5 @@ A Jenkins pipeline/job is included for dependency resolution and build, running 
 
 ##### Links
 
-For detailed information including an explanation of the backpropagation process see...
-
+For detailed information including an explanation of the backpropagation process see...<br>
 [http://oraclepermissiongenerator.net/backpropagationvisualization/](http://oraclepermissiongenerator.net/backpropagationvisualization/)
